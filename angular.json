@@ -3,14 +3,13 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "page-builder-catalog": {
-      "root": "",
-      "sourceRoot": "src",
+    "testing": {
+      "root": "projects/testing/",
+      "sourceRoot": "projects/testing/src",
       "projectType": "application",
-      "prefix": "cat",
+      "prefix": "tst",
       "schematics": {
         "@schematics/angular:component": {
-          "inlineTemplate": true,
           "inlineStyle": true,
           "styleext": "scss"
         }
@@ -19,17 +18,17 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/page-builder-catalog",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "outputPath": "dist/testing",
+            "index": "projects/testing/src/index.html",
+            "main": "projects/testing/src/main.ts",
+            "polyfills": "projects/testing/src/polyfills.ts",
+            "tsConfig": "projects/testing/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/testing/src/favicon.ico",
+              "projects/testing/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "projects/testing/src/styles.scss"
             ],
             "scripts": []
           },
@@ -37,8 +36,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "projects/testing/src/environments/environment.ts",
+                  "with": "projects/testing/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -56,34 +55,34 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "page-builder-catalog:build"
+            "browserTarget": "testing:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "page-builder-catalog:build:production"
+              "browserTarget": "testing:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "page-builder-catalog:build"
+            "browserTarget": "testing:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
+            "main": "projects/testing/src/test.ts",
+            "polyfills": "projects/testing/src/polyfills.ts",
+            "tsConfig": "projects/testing/tsconfig.spec.json",
+            "karmaConfig": "projects/testing/karma.conf.js",
             "styles": [
-              "src/styles.scss"
+              "projects/testing/src/styles.scss"
             ],
             "scripts": [],
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/testing/src/favicon.ico",
+              "projects/testing/src/assets"
             ]
           }
         },
@@ -91,8 +90,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
+              "projects/testing/tsconfig.app.json",
+              "projects/testing/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -101,26 +100,61 @@
         }
       }
     },
-    "page-builder-catalog-e2e": {
-      "root": "e2e/",
+    "testing-e2e": {
+      "root": "projects/testing-e2e/",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "page-builder-catalog:serve"
+            "protractorConfig": "projects/testing-e2e/protractor.conf.js",
+            "devServerTarget": "testing:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "page-builder-catalog:serve:production"
+              "devServerTarget": "testing:serve:production"
             }
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
+            "tsConfig": "projects/testing-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "page-builder-catalog": {
+      "root": "projects/page-builder-catalog",
+      "sourceRoot": "projects/page-builder-catalog/src",
+      "projectType": "library",
+      "prefix": "cat",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/page-builder-catalog/tsconfig.lib.json",
+            "project": "projects/page-builder-catalog/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/page-builder-catalog/src/test.ts",
+            "tsConfig": "projects/page-builder-catalog/tsconfig.spec.json",
+            "karmaConfig": "projects/page-builder-catalog/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/page-builder-catalog/tsconfig.lib.json",
+              "projects/page-builder-catalog/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]
@@ -129,5 +163,5 @@
       }
     }
   },
-  "defaultProject": "page-builder-catalog"
+  "defaultProject": "testing"
 }
