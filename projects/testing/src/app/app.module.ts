@@ -7,13 +7,17 @@ import { PageBuilderCatalogService } from 'projects/page-builder-catalog/src/pub
 import { HomeComponent } from './home.component';
 import { GroupComponent } from './group.component';
 import { DebugComponent } from './debug.component';
+import { HeadingComponent } from './heading.component';
+import { ParagraphComponent } from './paragraph.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     GroupComponent,
-    DebugComponent
+    DebugComponent,
+    HeadingComponent,
+    ParagraphComponent
   ],
   imports: [
     BrowserModule,
@@ -22,45 +26,16 @@ import { DebugComponent } from './debug.component';
   ],
   providers: [PageBuilderCatalogService],
   bootstrap: [AppComponent],
-  entryComponents: [GroupComponent, DebugComponent]
+  entryComponents: [
+    GroupComponent,
+    DebugComponent,
+    HeadingComponent,
+    ParagraphComponent
+  ]
 })
 export class AppModule {
 
-  constructor(private bgService: PageBuilderCatalogService) {
-    // alternative... https://vsavkin.com/angular-router-declarative-lazy-loading-7071d1f203ee
-    this.bgService.attach([
-      {
-        title: 'Test Page1',
-        id: 'tp1',
-        items: [
-          {
-            type: 'group',
-            label: 'testing',
-            childInstructions: [
-              { type: 'debug' },
-              { type: 'group'
-                , label: 'New SUB group'
-                , childInstructions: [
-                  { type: 'debug' }
-                ]}
-            ]
-          },
-          {
-            type: 'group',
-            label: 'testing',
-            childInstructions: [
-              { type: 'debug' },
-              { type: 'debug' },
-              { type: 'debug' }
-            ]
-          }
-        ]
-      },
-      {
-        title: 'Test Page2',
-        id: 'tp2'
-      }
-    ]);
+  constructor() {
 
   }
 

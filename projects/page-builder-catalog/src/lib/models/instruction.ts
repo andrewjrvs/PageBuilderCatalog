@@ -4,7 +4,7 @@
  */
 export interface Instruction {
     type: string;
-    label?: string;
-    map?: string;
+    text?: string;
+    data?: any;
     childInstructions?: Instruction[];
 }

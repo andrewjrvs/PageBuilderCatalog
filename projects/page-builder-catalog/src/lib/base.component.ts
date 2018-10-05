@@ -28,7 +28,7 @@ export class BaseComponent extends TemplateComponent implements OnInit, AfterVie
   }
 
   ngAfterViewInit() {
-    this.page$.pipe(first()).subscribe((pg) => this.buildInstructions(pg.items));
+    this.page$.subscribe((pg) => this.buildInstructions(pg.items));
   }
 
 }

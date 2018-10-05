@@ -19,9 +19,9 @@ export class TemplateComponent implements AfterViewInit {
     @Input()
     public ID: string | null = null;
 
-    public get label() {
-        if (this.instruction && this.instruction.label) {
-            return this.instruction.label;
+    public get text() {
+        if (this.instruction && this.instruction.text) {
+            return this.instruction.text;
         }
         return null;
     }
